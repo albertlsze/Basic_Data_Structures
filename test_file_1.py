@@ -64,7 +64,6 @@ print('\n')
 '''------------------------------------------------Queues Test--------------------------------------------------------'''
 from StacksAndQueues.QueuesClass import Queues
 
-print('Queues Example')
 queues_item = Queues()
 
 print('\tIs empty: ' + str(queues_item.isEmpty()))
@@ -91,3 +90,4 @@ while(not queues_item.isEmpty()):
     queues_item.pop()
 
 print('\n')
+
