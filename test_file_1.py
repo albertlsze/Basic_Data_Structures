@@ -64,7 +64,6 @@ print('\n')
 '''------------------------------------------------Queues Test--------------------------------------------------------'''
 from StacksAndQueues.QueuesClass import Queues
 
-print('Queues Example')
 queues_item = Queues()
 
 print('\tIs empty: ' + str(queues_item.isEmpty()))
