@@ -25,30 +25,23 @@ class Trie:
         """
         Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
         """
-        searchBranch = [self.root]
-        searchOutput = [True]
-        for i in range(len(word)):
-            newBranches = []
-            newOutput = []
-            for branch in range(0, len(searchBranch)):
-                if not searchOutput[branch]:
-                    continue
-                if word[i] == '.':
-                    if len(searchBranch[branch].children.keys()) < 1:
-                        searchOutput[branch] = False
-                    else:
-                        for key in searchBranch[branch].children:
-                            newBranches.append(searchBranch[branch].children[key])
-                            newOutput.append(True)
+        searchBranchQueue = [(self.root,0)]
+        i = 0
 
-                letter = word[i].lower()
-                if letter in searchBranch[branch].children:
-                    searchBranch[branch] = searchBranch[branch].children[letter]
-                else:
-                    searchOutput[branch] = False
+        while searchBranchQueue and i < len(word):
+            letter = word[i].lower()
 
-            if len(newBranches) > 0:
-                searchBranch = newBranches
-                searchOutput = newOutput
+            if letter == '.':
+                for node in searchBranchQueue[0][0].children:
+                    searchBranchQueue.append((searchBranchQueue[0][0].children[node],i+1))
+            elif letter in searchBranchQueue[0][0].children:
+                searchBranchQueue.append((searchBranchQueue[0][0].children[letter], i + 1))
 
-        return True in searchOutput
+            searchBranchQueue.pop(0)
+            if searchBranchQueue:
+                i = searchBranchQueue[0][1]
+
+        if searchBranchQueue:
+            return True
+        else:
+            return False
